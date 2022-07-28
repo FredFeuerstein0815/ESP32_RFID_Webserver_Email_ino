@@ -1,2 +1,2 @@
-# ESP32_RFID_Webserver_Email_ino
-ESP32 with RFID-Reader, Webserver and Emailnotification
+# ESP32, MFRC522-RFID-Reader, Webserver, Emailnotification
+ESP32 with MFRC522-RFID-Reader, Webserver and Emailnotification
