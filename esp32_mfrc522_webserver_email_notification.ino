@@ -8,20 +8,20 @@
 #include <MFRC522Debug.h>
 #include <string.h>
 
-#define SMTP_HOST "mail.gmx.net"
+#define SMTP_HOST "mail.gmx.net" // your mail provider
 #define SMTP_PORT 587
-#define AUTHOR_EMAIL "absender@gmx.de"
-#define AUTHOR_PASSWORD "geheimes_passwort"
-#define RECIPIENT_EMAIL "empfaenger@gmx.de"
+#define AUTHOR_EMAIL "absender@gmx.de" // your mail, change also in line 278 below
+#define AUTHOR_PASSWORD "geheimes_passwort" // your mail password
+#define RECIPIENT_EMAIL "empfaenger@gmx.de" // recipient
 
 SMTPSession smtp;
 void smtpCallback(SMTP_Status status);
 
 
-const char* ssid = "WLAN_SSID";
-const char* password = "geheimes_passwort";
+const char* ssid = "WLAN_SSID"; // your wifi ssid
+const char* password = "geheimes_passwort"; // your wifi password
 
-IPAddress local_IP(192, 168, 0, 99);
+IPAddress local_IP(192, 168, 0, 99); // ip for the esp32
 IPAddress gateway(192, 168, 0, 1);
 IPAddress subnet(255, 255, 255, 0);
 IPAddress primaryDNS(8, 8, 8, 8);
@@ -29,8 +29,8 @@ IPAddress secondaryDNS(8, 8, 4, 4);
 
 const char* input_parameter = "state";
 
-const int output = 16;
-const int Push_button_GPIO = 39 ;
+const int output = 16; // output GPIO
+const int Push_button_GPIO = 39 ; // if you want to use a button
 
 // Variables will change:
 int LED_state = HIGH;         
@@ -226,7 +226,7 @@ void loop(void) {
 int uid ;
 uid = (reader.uid.uidByte[0] << 24) | (reader.uid.uidByte[1] << 16) | (reader.uid.uidByte[2] << 8) | reader.uid.uidByte[3];
 
-unsigned int code1 = 0x01234567;
+unsigned int code1 = 0x01234567; // uid of RFID-Tag
 unsigned int code2 = 0x89ABCDEF;
 
 if((uid) == (code1))
@@ -291,7 +291,7 @@ smtp.debug(1);
   if (!MailClient.sendMail(&smtp, &message))
     Serial.println("Fehler beim versenden der Email, " + smtp.errorReason());
 
-   delay(60000);
+   delay(60000); // wait 1 Minute if a wrong UID was tried
    Serial.println("Nächster Versuch");}
 
   int data = digitalRead(Push_button_GPIO);
